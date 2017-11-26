@@ -1,0 +1,175 @@
+<!-- 
+* Vysheslavov Euard, email: v-e-y@outlook.com
+* Date: 11.2017
+* Home work at PHP Academy (group 07.11_РНР) after lesson 2 (HTML & css)
+* Task:
+* Сверстать своё резюме в виде html-странички.
+* Должны быть заголовки, картинки, теги p, ul, ссылки на соцсети в виде картинок, таблица...etc, плюс добавляйте стили и т.д..
+-->
+<!DOCTYPE html>
+<html lang="ua">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Резюме Вишеславова Едуарда Юрійовича</title>
+    <meta name="description" content="Резюме Вишеславова Едуарда Юрійовича.">
+    <meta name="keywords" content="CV, резюме,">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="./public/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./public/css/main.css">
+</head>
+
+<body class="col-md-9 mx-auto">
+    <header class="pb-3">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <h1 class="navbar-brand mb-0 mt-0">Коротке резюме</h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">Про мене</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education">Освіта</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#last_projects">Останні проекти</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#last_jobs">Місця роботи</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+        <div class="row">
+            <div class="content col-md-8">
+                <section id="about" class="pt-3 pb-3">
+                    <h2 class="h3 border border-secondary border-right-0 border-left-0 border-top-0">Про мене.</h2>
+                    <div>
+                        <p>Hello, I’m Lorem ipsum dolor sit amet, conseur adipiscing elit puella magna est.<br>Etiam sem eros, interdum at rutrum et, hendrerit id nisi. Etiam iaculis lorem eget arcu gravida lacinia. Fringilla justo ullamcorper ac. Class
+                            aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Raesent sem elit, volutpat id vulputate faucibus, fringilla vel massa. Proin nec mi a mi tincidunt elementum sed vel ipsum.</p>
+                    </div>
+                </section>
+                <section id="education" class="pt-3 pb-3">
+                    <h2 class="h3 border border-secondary border-right-0 border-left-0 border-top-0">Освіта.</h2>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 class="h5">Середня</h3>
+                            <p>Повна середня освіта<br>СШ №119</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h3 class="h5">Вища освіта</h3>
+                            <p>Бакалавр<br>Національний Гірничий Університет.</p>
+                        </div>
+                    </div>
+                </section>
+                <section id="last_projects" class="pt-3 pb-3">
+                    <h2 class="h3 border border-secondary border-right-0 border-left-0 border-top-0">Останні проекти.</h2>
+                    <div class="row align-items-center">
+                        <div class="col-md-4 text-center">
+                            <a href="http://www.sergio-valentini.com/" title="Официальный интернет-магазин Sergio Valentini" target="_blank">
+                                <img src="./public/img/last-project-1.jpg" alt="" class="img-fluid"><br>
+                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <a href="https://www.kozhgalantereya.com/" title="Интернет-магазин Kozhgalantereya.com" target="_blank">
+                                <img src="./public/img/last-project-2.jpg" alt="" class="img-fluid"><br>
+                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <a href="https://www.optom.kozhgalantereya.com/" title="Оптовый интернет-магазин" target="_blank">
+                                <img src="./public/img/last-project-3.jpg" alt="" class="img-fluid"><br>
+                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <p class="text-muted">Виконані роботи:<br>Проектування, розробка, верстка, базова сео підготовка, запуск і супровід..</p>
+                </section>
+                <section id="last_jobs" class="pt-3 pb-3">
+                    <h2 class="h3 border border-secondary border-right-0 border-left-0 border-top-0">Останні місця роботи.</h2>
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <p class="small mb-0 text-success">2013 - 2017</p>
+                            <p class="lead mb-0">KG</p>
+                            <p class="text-muted small">Співвласник, сео.<br>В першу чергу відповідальний за технічний розвиток компанії, а також за розвиток компанії в веб середовищі.</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <p class="small mb-0 text-success">2009 - 2013</p>
+                            <p class="lead mb-0">ООО Миа</p>
+                            <p class="text-muted small">Начальник складу. Через деякий час додався обов'язок, відповідав за тхне компанії в веб середовищі.</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <p class="small mb-0 text-success">2005 - 2009</p>
+                            <p class="lead mb-0">НПО "Никос"</p>
+                            <p class="text-muted small">2005 - 2007 Помічник бурильника. 2007 - 2009 Бурильник.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="sidebar col-md-4">
+                <section class="cv-image pb-1">
+                    <img src="./public/img/profile-image.JPG" alt="" class="img-fluid img-thumbnail">
+                </section>
+                <section class="cv-contacts">
+                    <ul class="list-unstyled">
+                        <li>Дніпро, Україна</li>
+                        <li>Email: <a href="mailto:v-e-y@outlook.com">v-e-y@outlook.com</a></li>
+                        <li><abbr title="Мобільний">Телефон:</abbr> +38 (093) 312-12-03</li>
+                        <li>Skype: skypeName</li>
+                    </ul>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="https://www.facebook.com/ed.vusha" title="facebook Вишеславов Е.Ю." target="_blank" rel="nofollow noopener">
+                                <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://github.com/v-e-y" title="Github Вишеславов Е.Ю." target="_blank" rel="nofollow noopener">
+                                <i class="fa fa-github fa-lg" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://twitter.com/V__E__Y" title="twitter Вишеславов Е.Ю." target="_blank" rel="nofollow noopener">
+                                <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://www.instagram.com/v_e_y/" title="instagram Вишеславов Е.Ю." target="_blank" rel="nofollow noopener">
+                                <i class="fa fa-instagram fa-lg" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p class="mb-0 text-muted">Copyright © 2017. Бета версія резюме Вишеславова Е.Ю.</p>
+    </footer>
+    <!--
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th></th>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    -->
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/ae77820a79.js"></script>
+
+</html>

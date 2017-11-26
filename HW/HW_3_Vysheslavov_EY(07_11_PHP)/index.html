@@ -1,0 +1,59 @@
+<!-- 
+* Vysheslavov Euard, email: v-e-y@outlook.com
+* Date: 14.2017
+* Home work at PHP Academy (group 07.11_РНР) №3
+* Task: Сделать форму авторизации. Добавить "глазик" для показа пароля.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Авторизация</title>
+    <meta name="Keywords" content="авторизация, логин, страница входа">
+    <meta name="Description" content="Самая лучшая авторизация в мире))) шутка. ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="./public/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./public/css/main.css">
+</head>
+
+<body class="container">
+    <header class="text-center">
+        <h1 class="display-2 text-gray">Авторизация</h1>
+    </header>
+    <main class="pt-4 pb-4">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body" role="form">
+                        <form action="/#" method="post" autocomplete="off">
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="user-email" placeholder="Your email" required>
+                            </div>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="user-password" placeholder="Password, min 6 characters" minlength="6" required>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-outline-secondary" type="button" id="showPasswordButton">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <button type="submit" class="btn btn-outline-success btn-block mt-3">login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="text-center">
+        <p class="mb-0 text-gray">Copyright © 2017. Вишеславова Е.Ю.</p>
+    </footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script src="./public/js/main.js"></script>
+
+</html>
