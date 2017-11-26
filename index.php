@@ -20,7 +20,6 @@ $someArray = [
 // sprintf('%s %s', ...$someArray);
 // print_r(count($someArray));
 // echo count($someArray, COUNT_RECURSIVE);
-
 ?>
 
 
