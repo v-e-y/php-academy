@@ -3,8 +3,8 @@
 * PATH: /HW/HW_21_11_Vysheslavov_EY_07_11_PHP/data/
 */
 
-// TODOS del dec comments
-
+// TODOS del dev comments
+echo 'test bootstrap require';
 
 // Example data for menu
 // TODO Change variable to return, variable for dev
@@ -76,4 +76,4 @@ function showMenuItems(array $menuArry)
 }
 
 
-showMenuItems($devArr);
+//showMenuItems($devArr);

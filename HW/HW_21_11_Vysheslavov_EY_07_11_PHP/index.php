@@ -3,6 +3,9 @@
 * Vysheslavov Euard, email: v-e-y@outlook.com
 * Home work, from 21.11.17, at PHP Academy (group 07.11_РНР).
 * Task: 
+* PATH: /HW/HW_21_11_Vysheslavov_EY_07_11_PHP/
+* App TODOS: 
+*   Cheng "project" words to "App"
 */
 
 require_once('.\conf.php');
@@ -13,8 +16,9 @@ if ($env === 'dev') {
     error_reporting(E_ALL);
 }
 
-// App menu data.
-$appMenu = require_once('.\data\menu.php');
+
+// bootstrap function(s)
+require_once('.\bootstrap.php');
 
 ?>
 

@@ -1,11 +1,15 @@
 <?php
 /*
+* PATH: /HW/HW_21_11_Vysheslavov_EY_07_11_PHP/
 * project proppertys and settings
 */
 
-// Project environment "dev" - for developming and "pub" - for public
-$environment = 'dev';
 
+// Project environment "dev" - for developming and "pub" - for public
+$env = 'dev';
+
+// TODO delete this.
+// echo $env;
 
 // Project file structure
 $projectFolders = [
@@ -34,3 +38,6 @@ $projectFolders = [
     ],
     'conf.php'
 ];
+
+
+//print_r(array_reverse($projectFolders));
