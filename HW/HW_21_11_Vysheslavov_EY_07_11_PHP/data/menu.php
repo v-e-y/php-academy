@@ -63,10 +63,12 @@ function showMenuItems(array $menuArry)
 {
     // print_r($menuArry);
     foreach ($menuArry as $menuArryItem) {
-        if ($menuArryItem['child'] == false) {
+        // if array item haven`t child items
+        if (!$menuArryItem['child']) {
             echo $menuArryItem['id']; 
         }
-        if ($menuArryItem['child'] == true) {
+        // if array item have child items
+        if ($menuArryItem['child']) {
             echo $menuArryItem['id'];
             showMenuItems($menuArryItem['childItems']);
         }
