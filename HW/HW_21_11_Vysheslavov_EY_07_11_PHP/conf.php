@@ -31,8 +31,5 @@ $projectFolders = [
             'component.php'
         ],
     ],
-    'data' => [
-        'menu.php'
-    ],
     'conf.php'
 ];

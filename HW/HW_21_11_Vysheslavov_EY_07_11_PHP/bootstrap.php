@@ -19,12 +19,10 @@ function bootstrap (array $projectFolders) {
     // Build view
     // $viewFiles = array_reverse($projectFolders['components']); // App views
     foreach ($projectFolders['components'] as $key => $value) {
-       //var_dump('./components/' . $key . '/' . $value['templates'][0]);
        require_once('./components/' . $key . '/templates/' . $value['templates'][0]);
     }
     
 }
-
 
 // Run/Build app 
 bootstrap($projectFolders);

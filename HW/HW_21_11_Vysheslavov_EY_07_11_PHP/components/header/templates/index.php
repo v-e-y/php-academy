@@ -3,8 +3,8 @@
 * PATH: /HW/HW_21_11_Vysheslavov_EY_07_11_PHP/components/header/templates/
 */
 
-$menuArry = require_once('../component.php');
-// $menuArry = require_once($_SERVER['DOCUMENT_ROOT'] . '/components/header' . '/component.php');
+//$menuArry = require_once('../component.php');
+$menuArry = require_once($_SERVER['DOCUMENT_ROOT'] . '/components/header' . '/component.php');
 ?>
 
 <header>
