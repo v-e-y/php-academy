@@ -10,13 +10,15 @@
 
 function bootstrap (array $projectFolders) {
     // require project data 
+    /*
     foreach ($projectFolders['data'] as $dataFiles) {
         require_once('./data/' . $dataFiles);
     }
+    */
 
     // Build view
     // $viewFiles = array_reverse($projectFolders['components']); // App views
-    foreach (array_reverse($projectFolders['components']) as $key => $value) {
+    foreach ($projectFolders['components'] as $key => $value) {
        //var_dump('./components/' . $key . '/' . $value['templates'][0]);
        require_once('./components/' . $key . '/templates/' . $value['templates'][0]);
     }
