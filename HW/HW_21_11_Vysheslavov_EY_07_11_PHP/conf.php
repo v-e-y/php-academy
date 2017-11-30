@@ -3,7 +3,7 @@
 * PATH: /HW/HW_21_11_Vysheslavov_EY_07_11_PHP/
 * project proppertys and settings
 */
-
+echo '_conf file_';
 
 // Project environment "dev" - for developming and "pub" - for public
 $env = 'dev';

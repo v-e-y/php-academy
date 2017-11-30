@@ -4,10 +4,10 @@
 */
 
 // TODOS del dev comments
-echo 'test bootstrap require';
+echo '_menu file_';
 
 // Example data for menu
-// TODO Change variable to return, variable for dev
+// TODO Change variable to return. variable for dev
 $devArr = [
     [
         'id' => 0,
