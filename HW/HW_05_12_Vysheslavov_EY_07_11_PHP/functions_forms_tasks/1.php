@@ -6,6 +6,9 @@
 *          Реализацию это логики необходимо поместить в функцию getCommonWords($a, $b), которая будет возвращать массив с общими словами.
 */
 
+if (isset($_POST['textFielOne']) && isset($_POST['textFielTwo'])) {
+   var_dump($_POST['textFielOne'], $_POST['textFielTwo']);
+}
 
 
 
@@ -21,7 +24,13 @@
     <title>Two forms with textarea</title>
 </head>
 <body>
-    <form action="" method="post" role="form"></form>
+    <form action="/" method="post" role="form">
+        <textarea name="textFielOne" id="textFielOne" cols="30" rows="10"></textarea>
+        <br>
+        <textarea name="textFieldTwo" id="textFieldTwo" cols="30" rows="10"></textarea>
+        <br>
+        <input type="submit" value="Send me">
+    </form>
 </body>
 </html>
 
