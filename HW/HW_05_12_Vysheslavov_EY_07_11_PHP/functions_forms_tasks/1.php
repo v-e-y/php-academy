@@ -6,11 +6,14 @@
 *          Реализацию это логики необходимо поместить в функцию getCommonWords($a, $b), которая будет возвращать массив с общими словами.
 */
 
+// show errors
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if (isset($_POST['textFielOne']) && isset($_POST['textFielTwo'])) {
-   var_dump($_POST['textFielOne'], $_POST['textFielTwo']);
+   print_r(getCommonWords($_POST['textFielOne'], $_POST['textFielTwo']));
 }
-
-
 
 ?>
 
@@ -24,11 +27,9 @@ if (isset($_POST['textFielOne']) && isset($_POST['textFielTwo'])) {
     <title>Two forms with textarea</title>
 </head>
 <body>
-    <form action="/" method="post" role="form">
-        <textarea name="textFielOne" id="textFielOne" cols="30" rows="10"></textarea>
-        <br>
-        <textarea name="textFieldTwo" id="textFieldTwo" cols="30" rows="10"></textarea>
-        <br>
+    <form action="/1.php" method="post" role="form">
+        <textarea name="textFielOne" id="textFielOne" cols="30" rows="10"></textarea><br>
+        <textarea name="textFieldTwo" id="textFieldTwo" cols="30" rows="10"></textarea><br>
         <input type="submit" value="Send me">
     </form>
 </body>
@@ -36,9 +37,29 @@ if (isset($_POST['textFielOne']) && isset($_POST['textFielTwo'])) {
 
 
 <?php
+/**
+ * Take two strings from textarea field, compare words and return identical
+ * @param string $a
+ * @param string $b
+ * @return array
+ */
+function getCommonWords(string $a = NULL, string $b = NULL):array {
+    if ($a && $b) {
+        // make array from string and trim each element
+        $c = array_map(function($a) {
+            return trim($a);
+        }, explode(' ', $a));
 
-function getCommonWords($a, $b) {
-    
+        // make array from string and trim each element
+        $d = array_map(function($b) {
+            return trim($b);
+        }, explode(' ', $b));
+
+        // compare words in arrays
+        return array_intersect($c, $d);
+    } else {
+        return var_dump('some error at vars', $a, $b);
+    }
 }
 
 ?>

@@ -1,6 +1,8 @@
 
 # Created by https://www.gitignore.io/api/visualstudiocode
 
+test.php
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
