@@ -2,7 +2,8 @@
 /*
 * Vysheslavov E.Y. (07_11_PHP) [v-e-y@outlook.com]
 * Home work from 05.12
-* Task: 7. Создать гостевую книгу, где любой человек может оставить комментарий в текстовом поле и добавить его. Все добавленные комментарии выводятся над текстовым полем.
+* Task: 8. Создать гостевую книгу, где любой человек может оставить комментарий в текстовом поле и добавить его. Все добавленные комментарии выводятся над текстовым полем. 
+Реализовать проверку на наличие в тексте запрещенных слов, матов. При наличии таких слов - выводить сообщение "Некорректный комментарий". Реализовать удаление из комментария всех тегов, кроме тега &lt;b&gt;.
 */
 
 // show errors
@@ -36,6 +37,18 @@ function writeCommentToFile(string $userComment, string $commentsFile):void {
     if (file_put_contents($commentsFile, $userCommentsJson)) {
         echo 'comment was saved';
     }
+}
+
+function checkComment(string $userComment):string {
+    // words to block (remove frpm text)
+    $blockWords = ['сука', 'сукин', 'суки'];
+    // clean comment
+    $userComment = strip_tags($userComment, '&lt;b&gt;');
+    // Make array from userComment type string
+    $userComment = explode(' ', $userComment);
+    // filter comment
+    $filteredComment = array_diff($userComment, $blockWords);
+
 }
 
 /**
