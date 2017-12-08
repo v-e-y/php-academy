@@ -2,7 +2,7 @@
 /*
 * Vysheslavov E.Y. (07_11_PHP) [v-e-y@outlook.com]
 * Home work from 05.12
-* Task: 9. Написать функцию, которая переворачивает строку. Было "abcde", должна выдать "edcba". Ввод текста реализовать с помощью формы.
+* Task: 10. Написать функцию, которая считает количество уникальных слов в тексте. Слова разделяются пробелами. Текст должен вводиться с формы.
 */
 
 // show errors
@@ -11,16 +11,17 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 if (isset($_POST['user_text']) && isset($_POST['submit'])) {
-    echo stringReverse($_POST['user_text']);
+    echo getCountUniqueWords($_POST['user_text']);
 }
 
 /**
- * Reverse user string
+ * Count of unique words in user text 
  * @param string $userText
- * @return string
+ * @return int
  */
-function stringReverse(string $userText):string {
-    return strrev(strip_tags($userText));
+function getCountUniqueWords(string $userText):int {
+    $userText = explode(' ', $userText);
+    return count(array_count_values($userText));
 }
 
 
