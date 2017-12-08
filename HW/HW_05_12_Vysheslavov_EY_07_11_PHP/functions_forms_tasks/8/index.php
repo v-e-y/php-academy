@@ -12,11 +12,15 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 if (isset($_POST['user_comment']) && isset($_POST['submit'])) {
-    $userComment = strip_tags($_POST['user_comment']);
     // file for write and store comment
     $commentsFile = './comments.json';
-
-    writeCommentToFile($userComment, $commentsFile);
+    $userComment = checkComment($_POST['user_comment']);
+    if ($userComment) {
+        writeCommentToFile($userComment, $commentsFile);
+    } else {
+        // user comment with block words
+        $isCommentBlock = true;
+    }
 }
 
 
@@ -33,13 +37,12 @@ function writeCommentToFile(string $userComment, string $commentsFile):void {
     $allComments[] = $userComment;
     // format array to json
     $userCommentsJson = json_encode($allComments, JSON_PRETTY_PRINT);
-
     if (file_put_contents($commentsFile, $userCommentsJson)) {
         echo 'comment was saved';
     }
 }
 
-function checkComment(string $userComment):string {
+function checkComment(string $userComment) {
     // words to block (remove frpm text)
     $blockWords = ['сука', 'сукин', 'суки'];
     // clean comment
@@ -47,8 +50,15 @@ function checkComment(string $userComment):string {
     // Make array from userComment type string
     $userComment = explode(' ', $userComment);
     // filter comment
-    $filteredComment = array_diff($userComment, $blockWords);
+    // $filteredComment = array_diff($userComment, $blockWords);
 
+    // should be more lith/simply method
+    foreach ($userComment as $word) {
+        if (in_array(trim(strtolower($word)), $blockWords)) {
+            return false;
+        }
+    }
+    return implode(' ', $userComment);
 }
 
 /**
@@ -63,12 +73,6 @@ function getComments(string $fileName):array {
         return $commentsData;
     }
 }
-
-$listOfAllComments = getComments('./comments.json');
-/* echo '<pre>';
-print_r($listOfAllComments);
-die; */
-
 ?>
 
 
@@ -81,7 +85,10 @@ die; */
     <title>Document</title>
 </head>
 <body>
-    <?php foreach ($listOfAllComments as $comment): ?>
+    <?php if ($isCommentBlock): ?>
+        <h3>Некорректный комментарий</h3>
+    <?php endif; ?>
+    <?php foreach (getComments('./comments.json') as $comment): ?>
         <hr>
         <p><?= $comment; ?></p>
     <?php endforeach ?>
