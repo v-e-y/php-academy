@@ -51,6 +51,11 @@ function getComments(string $fileName):array {
     }
 }
 
+$listOfAllComments = getComments('./comments.json');
+/* echo '<pre>';
+print_r($listOfAllComments);
+die; */
+
 ?>
 
 
@@ -63,7 +68,7 @@ function getComments(string $fileName):array {
     <title>Document</title>
 </head>
 <body>
-    <?php foreach (getComments('./comments.json') as $comment): ?>
+    <?php foreach ($listOfAllComments as $comment): ?>
         <hr>
         <p><?= $comment; ?></p>
     <?php endforeach ?>
