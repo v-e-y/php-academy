@@ -2,7 +2,11 @@
 
 return [
     'roots' => [
-        'img' => './uploads/img/',
+        // TODO refactor this
+        'jpeg' => './uploads/img/',
+        'JPEG' => './uploads/img/',
+        'jpg' => './uploads/img/',
+        'png' => './uploads/img/',
         'csv' => './upload/csv/',
         'pdf' => './uploads/pdf/'
     ],

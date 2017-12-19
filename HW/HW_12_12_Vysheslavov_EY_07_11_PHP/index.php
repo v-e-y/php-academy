@@ -11,30 +11,26 @@
 
 // App configs
 $config = require_once('./conf.php');
+$errors = [];
 // App functions
 require_once('./functions.php');
 
-
 // Show errors
 if ($config['env'] === 'dev') {
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
+    ini_set('display_errors', '1');
+    ini_set('display_startup_errors', '1');
     error_reporting(E_ALL);
-    echo 'hi';
 }
 
 
-
-if (isNoEmptyFormFileField($_FILES['upload_file'])) {
-    $fileName = getFileName($_FILES['upload_file']['name']);
-    // TODO можлимо extension
-    $fileType = getFileType($fileName);
-
-    if (isAllowedFileType($fileType, $config['allowedTypes'])) {
-        
+if (isset($_FILES['upload_file'])) {
+    if (isNoEmptyFormFileField($_FILES['upload_file']) && letsUploadFile($_FILES['upload_file'], $config)) {
+        $message = 'File was upload';
+        echo $message;
     }
+} else {
+    var_dump($errors);
 }
-
 
 ?>
 
