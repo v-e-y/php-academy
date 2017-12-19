@@ -1,18 +1,26 @@
 <?php declare(strict_types=1);
+/*
+* Vysheslavov E.Y. (07_11_PHP) [v-e-y@outlook.com]
+* Home work from 12.12
+* Task: Написать скрипт для загрузки пользовательских файлов. При загрузке, в зависимости от типа файла – он на сервере должен помещаться в папку /doc, или /img..etc
+* Должно быть ограничение на прием файлов – не более 2 мб.
+* Ссылку на форму загрузки разместить на главной странице сайта.
+* После добавления файлов, при заходе на главную, пользователь должен видеть галерею ранее загруженных картинок, и список загруженных документов (все, что не картинки).
+* Код максимально писать функциями.
+*/
 
 return [
     'roots' => [
-        // TODO refactor this
-        'jpeg' => './uploads/img/',
-        'JPEG' => './uploads/img/',
-        'jpg' => './uploads/img/',
-        'png' => './uploads/img/',
-        'csv' => './upload/csv/',
-        'pdf' => './uploads/pdf/'
+        'image' =>  './uploads/image/',
+        'application' => './uploads/doc/'
     ],
     'env' => 'dev',
-    'filesSize' => 2097152,
+    'allowedFileSize' => 2097152,
     'allowedTypes' => [
+        'image',
+        'application',
+    ],
+    'allowedExtension' => [
         'jpeg',
         'JPEG',
         'jpg',

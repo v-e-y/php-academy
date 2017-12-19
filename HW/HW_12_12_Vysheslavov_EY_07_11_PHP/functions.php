@@ -1,4 +1,13 @@
 <?php declare(strict_types=1);
+/*
+* Vysheslavov E.Y. (07_11_PHP) [v-e-y@outlook.com]
+* Home work from 12.12
+* Task: Написать скрипт для загрузки пользовательских файлов. При загрузке, в зависимости от типа файла – он на сервере должен помещаться в папку /doc, или /img..etc
+* Должно быть ограничение на прием файлов – не более 2 мб.
+* Ссылку на форму загрузки разместить на главной странице сайта.
+* После добавления файлов, при заходе на главную, пользователь должен видеть галерею ранее загруженных картинок, и список загруженных документов (все, что не картинки).
+* Код максимально писать функциями.
+*/
 
 
 /**
@@ -11,7 +20,6 @@ function uploadErrors(string $errorMessage, array &$errors):array {
     return $errors += $errorMessage;
 }
 
-
 /**
  * Undocumented function
  * @param array $field
@@ -20,10 +28,8 @@ function uploadErrors(string $errorMessage, array &$errors):array {
 function isNoEmptyFormFileField(array $field):bool {
     if ($field && is_array($field)) {
         return true;
-    } else {
-        uploadErrors('Something wrong with upload array');
-        return false;
-    }
+    } 
+    return false;
 }
 
 /**
@@ -32,36 +38,56 @@ function isNoEmptyFormFileField(array $field):bool {
  * @return string
  */
 function getFileName(string $uploadfileName):string {
-    return basename($uploadfileName) ?? uploadErrors('Something wrong with getFileName');
+    return basename($uploadfileName);
 }
 
 // TODO Hmmm, maby trash
 function getTmpFileName(string $tmpFileName):string {
-    return $tmpFileName ?? uploadErrors('Something wrong with getTmpFileName');
+    return $tmpFileName;
 }
 
 /**
- * Return short files type, like: pdf, jpg, png, csv
- * @param string $uploadFileName
- * @return string
+ * Return file type
+ * @param string $uploadFileType
+ * @return string 
  */
-function getFileType(string $uploadFileName):string {
-    return pathinfo($uploadFileName, PATHINFO_EXTENSION) ?? uploadErrors('Something wrong with getFileType');
+function getFileType(string $uploadFileType):string {
+    return stristr($uploadFileType, '/', true);
+}
+
+/**
+ * Return file extension
+ * @param string $uploadFileName
+ * @return string 
+ */
+function getFileExtension(string $uploadFileName):string {
+    return pathinfo($uploadFileName, PATHINFO_EXTENSION);
 }
 
 /**
  * Check upload file type for allowed in App
  * @param string $uploadFileType
- * @param array $allowedFormats
+ * @param array $allowedTypes
  * @return bool
  */
-function isAllowedFileType(string $uploadFileType, array $allowedFormats):bool {
-    if (in_array($uploadFileType, $allowedFormats)) {
+function isAllowedFileType(string $uploadFileType, array $allowedTypes):bool {
+    if (in_array($uploadFileType, $allowedTypes)) {
         return true;
-    } else {
-        uploadErrors('Something wrong with isAllowedFileType');
-        return false;
+    } 
+    return false;
+}
+
+/**
+ * Check upload file extension for allowed in App
+ * @param string $uploadFileExtension
+ * @param array $allowedExtension
+ * @return bool
+ */
+function isAllowedFileExtension(string $uploadFileExtension, array $allowedExtension):bool {
+    if (in_array($uploadFileExtension, $allowedExtension)) {
+        return true;
     }
+    return false;
 }
 
 /**
@@ -71,18 +97,17 @@ function isAllowedFileType(string $uploadFileType, array $allowedFormats):bool {
  * @return bool
  */
 function isFileSizeLess2mb(int $fileSize, int $fileMaxSize):bool {
-    return $fileSize <= $fileMaxSize ?? uploadErrors('Something wrong with isFileSizeLess2mb');   
+    return $fileSize <= $fileMaxSize;   
 }
 
 /**
  * Check is file exist
- * @param string $fileName
+ * @param string $fileType
  * @param array $rootsForUpload
  * @return bool
  */
-function isFileExist(string $fileName, array $rootsForUpload):bool {
-    $rootForCheck = $rootsForUpload[getFileType($fileName)];
-    return file_exists($rootForCheck) ?? uploadErrors('Something wrong with isFileExist');
+function isFileExist(string $fileNameForUpload):bool {
+    return file_exists($fileNameForUpload);
 }
 
 /**
@@ -112,24 +137,23 @@ function getFileNameForUpload(string $dirRootForUpload, string $fileName):string
  * @param array $uploadPropertis
  * @return bool
  */
-// TODO що краще, кожного разу викликати функції чи в зробити змінні (fileName, fileType, nameForUpload e.t.c.) і потім працювати зі змінними?
+// TODO що краще, кожного разу викликати функції чи зробити змінні (fileName, fileType, nameForUpload e.t.c.) і потім працювати зі змінними?
 function letsUploadFile(array $fileForUpload, array $uploadPropertis):bool {
-    // Lets check the file (size, format)
-    // TODO to long, to many code. 
-    if (isFileSizeLess2mb($fileForUpload['size'], $uploadPropertis['filesSize']) && isAllowedFileType(getFileType($fileForUpload['name']), $uploadPropertis['allowedTypes'])) {
-        if (!isFileExist(getFileName($fileForUpload['name']), getDirRootForUpload(getFileType($fileForUpload['name']), $uploadPropertis['roots']))) {
-            // Check(визначаємо) what dir use for upload
-            $dirRootForUpload = getDirRootForUpload(getFileType($fileForUpload['name']), $uploadPropertis['roots']);
-            // Upload file
-            return move_uploaded_file(getTmpFileName($fileForUpload['tmp_name']), getFileNameForUpload($dirRootForUpload, getFileName($fileForUpload['name'])));
+    $fileName = getFileName($fileForUpload{'name'});
+    $tmpFileName = getTmpFileName($fileForUpload['tmp_name']);
+    $fileType = getFileType($fileForUpload['type']);
+    $fileExtension = getFileExtension($fileName);
+    $fileSize = intval($fileForUpload['size']);
+    $fileNameForUpload = getFileNameForUpload(getDirRootForUpload($fileType, $uploadPropertis['roots']), $fileName);
+    
+    // Lets check the file (size, type, extension)
+    if (isFileSizeLess2mb($fileSize, $uploadPropertis['allowedFileSize']) && isAllowedFileType($fileType, $uploadPropertis['allowedTypes']) && isAllowedFileExtension($fileExtension, $uploadPropertis['allowedExtension'])) {
+        if (!isFileExist($fileNameForUpload)) {
+            return move_uploaded_file($tmpFileName, $fileNameForUpload);
         }
     }
-    uploadErrors('Something wrong with letsUploadFile');
     return false;
 }
-
-
-
 
 
 /**

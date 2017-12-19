@@ -24,6 +24,8 @@ if ($config['env'] === 'dev') {
 
 
 if (isset($_FILES['upload_file'])) {
+    echo '<pre>';
+    var_dump($_FILES['upload_file']);
     if (isNoEmptyFormFileField($_FILES['upload_file']) && letsUploadFile($_FILES['upload_file'], $config)) {
         $message = 'File was upload';
         echo $message;
