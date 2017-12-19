@@ -2,6 +2,7 @@
 # Created by https://www.gitignore.io/api/visualstudiocode
 
 test.php
+trash.html
 
 ### VisualStudioCode ###
 .vscode/*
@@ -12,3 +13,4 @@ test.php
 .history
 
 # End of https://www.gitignore.io/api/visualstudiocode
+trash.html
