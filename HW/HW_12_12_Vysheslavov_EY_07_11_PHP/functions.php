@@ -13,22 +13,24 @@
 /**
  * Something like errors log. 
  * @param string $errorMessage
- * @param array $errors
  * @return array
  */
-function uploadErrors(string $errorMessage, array &$errors):array {
-    return $errors += $errorMessage;
+function uploadErrors(string $errorMessage):array {
+     $errors[] = $errorMessage;
+     return $errors;
 }
 
 /**
- * Undocumented function
+ * Check field data is no empty and is array.
  * @param array $field
  * @return bool
  */
+// TODO This is probably superfluous.
 function isNoEmptyFormFileField(array $field):bool {
     if ($field && is_array($field)) {
         return true;
-    } 
+    }
+    uploadErrors('Somethin wrong in isNoEmptyFormFileField');
     return false;
 }
 
@@ -38,12 +40,12 @@ function isNoEmptyFormFileField(array $field):bool {
  * @return string
  */
 function getFileName(string $uploadfileName):string {
-    return basename($uploadfileName);
+    return basename($uploadfileName) ?? uploadErrors('Somethin wrong in getFileName');
 }
 
 // TODO Hmmm, maby trash
 function getTmpFileName(string $tmpFileName):string {
-    return $tmpFileName;
+    return $tmpFileName ?? uploadErrors('Somethin wrong in getTmpFileName');
 }
 
 /**
@@ -52,7 +54,7 @@ function getTmpFileName(string $tmpFileName):string {
  * @return string 
  */
 function getFileType(string $uploadFileType):string {
-    return stristr($uploadFileType, '/', true);
+    return stristr($uploadFileType, '/', true)  ?? uploadErrors('Somethin wrong in getFileType');
 }
 
 /**
@@ -61,7 +63,7 @@ function getFileType(string $uploadFileType):string {
  * @return string 
  */
 function getFileExtension(string $uploadFileName):string {
-    return pathinfo($uploadFileName, PATHINFO_EXTENSION);
+    return pathinfo($uploadFileName, PATHINFO_EXTENSION)  ?? uploadErrors('Somethin wrong in getFileExtension');
 }
 
 /**
@@ -73,7 +75,8 @@ function getFileExtension(string $uploadFileName):string {
 function isAllowedFileType(string $uploadFileType, array $allowedTypes):bool {
     if (in_array($uploadFileType, $allowedTypes)) {
         return true;
-    } 
+    }
+    uploadErrors('Somethin wrong in isAllowedFileType');
     return false;
 }
 
@@ -87,6 +90,7 @@ function isAllowedFileExtension(string $uploadFileExtension, array $allowedExten
     if (in_array($uploadFileExtension, $allowedExtension)) {
         return true;
     }
+    uploadErrors('Somethin wrong in isAllowedFileExtension');
     return false;
 }
 
@@ -117,7 +121,7 @@ function isFileExist(string $fileNameForUpload):bool {
  * @return string
  */
 function getDirRootForUpload(string $fileType, array $rootsForUpload):string {
-    return $rootsForUpload[$fileType];
+    return $rootsForUpload[$fileType] ?? uploadErrors('Somethin wrong in getDirRootForUpload');
 }
 
 /**
@@ -127,7 +131,7 @@ function getDirRootForUpload(string $fileType, array $rootsForUpload):string {
  * @return string
  */
 function getFileNameForUpload(string $dirRootForUpload, string $fileName):string {
-    return $dirRootForUpload . $fileName;
+    return $dirRootForUpload . $fileName  ?? uploadErrors('Somethin wrong in getFileNameForUpload');
 }
 
 
@@ -152,22 +156,31 @@ function letsUploadFile(array $fileForUpload, array $uploadPropertis):bool {
             return move_uploaded_file($tmpFileName, $fileNameForUpload);
         }
     }
+    uploadErrors('Somethin wrong in letsUploadFile');
     return false;
 }
 
-
 /**
- * Get list of files in dir
- * @param string $dirName
+ * Scan dirs and make the file list. 
+ * @param array $roots
  * @return array
  */
-function fileListInDir(string $dirName):array {
-    $listItemsInDir = array_diff(scandir($dirName), ['..', '.']);
-    $fileList = [];
-    foreach ($listItemsInDir as $value) {
-        if (is_file($dirName . '/' . $value)) {
-            $fileList[] = $value;
+function getFilesFromRoots(array $roots):array {
+    $files = [];
+    foreach ($roots as $root) {
+        // TODO Maybe should be more simple decision?
+        foreach (array_diff(scandir($root), ['..', '.']) as $file) {
+            $files[] = $root . $file;
         }
     }
-    return $fileList;
+    return $files;
+}
+
+/**
+ * Check the file is image.
+ * @param string $file
+ * @return bool
+ */
+function isFileIsImage(string $file):bool {
+    return (filesize($file)) ? is_array(getimagesize($file)) : false;
 }
