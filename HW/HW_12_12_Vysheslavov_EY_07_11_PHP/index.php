@@ -77,16 +77,16 @@ print_r($fileList); */
                     <?php endif; ?>
                 <?php endforeach; ?>
             </div>
+            <div class="clearfix"><hr></div>
+            <h2 class="h4 font-weight-light">Files list</h2>
+            <ul class="list-unstyled">
+            <?php foreach ($fileList as $file): ?>
+                <?php if (!isFileIsImage($file)): ?>
+                    <li><?= basename($file) ?></li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+            </ul>
         <?php endif; ?>
-        <div class="clearfix"><hr></div>
-        <h2 class="h4 font-weight-light">Files list</h2>
-        <ul class="list-unstyled">
-        <?php foreach ($fileList as $file): ?>
-            <?php if (!isFileIsImage($file)): ?>
-                <li><?= basename($file) ?></li>
-            <?php endif; ?>
-        <?php endforeach; ?>
-        </ul>
     </main>
     <footer>
         
