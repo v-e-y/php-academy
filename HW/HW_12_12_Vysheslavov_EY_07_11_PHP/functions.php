@@ -11,16 +11,6 @@
 
 
 /**
- * Something like errors log. 
- * @param string $errorMessage
- * @return array
- */
-function uploadErrors(string $errorMessage):array {
-     $errors[] = $errorMessage;
-     return $errors;
-}
-
-/**
  * Check field data is no empty and is array.
  * @param array $field
  * @return bool
@@ -30,7 +20,6 @@ function isNoEmptyFormFileField(array $field):bool {
     if ($field && is_array($field)) {
         return true;
     }
-    uploadErrors('Somethin wrong in isNoEmptyFormFileField');
     return false;
 }
 
@@ -39,13 +28,13 @@ function isNoEmptyFormFileField(array $field):bool {
  * @param string $fileName
  * @return string
  */
-function getFileName(string $uploadfileName):string {
-    return basename($uploadfileName) ?? uploadErrors('Somethin wrong in getFileName');
+function getFileName(string $uploadFileName):string {
+    return basename($uploadFileName);
 }
 
-// TODO Hmmm, maby trash
+// TODO Hm, maybe trash
 function getTmpFileName(string $tmpFileName):string {
-    return $tmpFileName ?? uploadErrors('Somethin wrong in getTmpFileName');
+    return $tmpFileName;
 }
 
 /**
@@ -54,7 +43,7 @@ function getTmpFileName(string $tmpFileName):string {
  * @return string 
  */
 function getFileType(string $uploadFileType):string {
-    return stristr($uploadFileType, '/', true)  ?? uploadErrors('Somethin wrong in getFileType');
+    return stristr($uploadFileType, '/', true);
 }
 
 /**
@@ -63,7 +52,7 @@ function getFileType(string $uploadFileType):string {
  * @return string 
  */
 function getFileExtension(string $uploadFileName):string {
-    return pathinfo($uploadFileName, PATHINFO_EXTENSION)  ?? uploadErrors('Somethin wrong in getFileExtension');
+    return pathinfo($uploadFileName, PATHINFO_EXTENSION);
 }
 
 /**
@@ -76,7 +65,6 @@ function isAllowedFileType(string $uploadFileType, array $allowedTypes):bool {
     if (in_array($uploadFileType, $allowedTypes)) {
         return true;
     }
-    uploadErrors('Somethin wrong in isAllowedFileType');
     return false;
 }
 
@@ -90,7 +78,6 @@ function isAllowedFileExtension(string $uploadFileExtension, array $allowedExten
     if (in_array($uploadFileExtension, $allowedExtension)) {
         return true;
     }
-    uploadErrors('Somethin wrong in isAllowedFileExtension');
     return false;
 }
 
@@ -100,7 +87,7 @@ function isAllowedFileExtension(string $uploadFileExtension, array $allowedExten
  * @param int $fileMaxSize
  * @return bool
  */
-function isFileSizeLess2mb(int $fileSize, int $fileMaxSize):bool {
+function isFileSizeLessThenAllowed(int $fileSize, int $fileMaxSize):bool {
     return $fileSize <= $fileMaxSize;   
 }
 
@@ -121,42 +108,41 @@ function isFileExist(string $fileNameForUpload):bool {
  * @return string
  */
 function getDirRootForUpload(string $fileType, array $rootsForUpload):string {
-    return $rootsForUpload[$fileType] ?? uploadErrors('Somethin wrong in getDirRootForUpload');
+    return $rootsForUpload[$fileType];
 }
 
 /**
- * Make/bild file name for upload
+ * Make/build file name for upload
  * @param string $dirRootForUpload
  * @param string $fileName
  * @return string
  */
 function getFileNameForUpload(string $dirRootForUpload, string $fileName):string {
-    return $dirRootForUpload . $fileName  ?? uploadErrors('Somethin wrong in getFileNameForUpload');
+    return $dirRootForUpload . $fileName;
 }
 
 
 /**
  * Check and upload file.
  * @param array $fileForUpload
- * @param array $uploadPropertis
+ * @param array $uploadProperties
  * @return bool
  */
 // TODO що краще, кожного разу викликати функції чи зробити змінні (fileName, fileType, nameForUpload e.t.c.) і потім працювати зі змінними?
-function letsUploadFile(array $fileForUpload, array $uploadPropertis):bool {
+function letsUploadFile(array $fileForUpload, array $uploadProperties):bool {
     $fileName = getFileName($fileForUpload{'name'});
     $tmpFileName = getTmpFileName($fileForUpload['tmp_name']);
     $fileType = getFileType($fileForUpload['type']);
     $fileExtension = getFileExtension($fileName);
     $fileSize = intval($fileForUpload['size']);
-    $fileNameForUpload = getFileNameForUpload(getDirRootForUpload($fileType, $uploadPropertis['roots']), $fileName);
+    $fileNameForUpload = getFileNameForUpload(getDirRootForUpload($fileType, $uploadProperties['roots']), $fileName);
     
     // Lets check the file (size, type, extension)
-    if (isFileSizeLess2mb($fileSize, $uploadPropertis['allowedFileSize']) && isAllowedFileType($fileType, $uploadPropertis['allowedTypes']) && isAllowedFileExtension($fileExtension, $uploadPropertis['allowedExtension'])) {
+    if (isFileSizeLessThenAllowed($fileSize, $uploadProperties['allowedFileSize']) && isAllowedFileType($fileType, $uploadProperties['allowedTypes']) && isAllowedFileExtension($fileExtension, $uploadProperties['allowedExtension'])) {
         if (!isFileExist($fileNameForUpload)) {
             return move_uploaded_file($tmpFileName, $fileNameForUpload);
         }
     }
-    uploadErrors('Somethin wrong in letsUploadFile');
     return false;
 }
 
@@ -182,5 +168,8 @@ function getFilesFromRoots(array $roots):array {
  * @return bool
  */
 function isFileIsImage(string $file):bool {
-    return (filesize($file)) ? is_array(getimagesize($file)) : false;
+    if (filesize($file) && exif_imagetype($file)) {
+        return true;
+    } 
+    return false;
 }

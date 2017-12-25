@@ -28,9 +28,9 @@ if (isset($_FILES['upload_file'])) {
     //var_dump($_FILES['upload_file']);
     if (isNoEmptyFormFileField($_FILES['upload_file']) && letsUploadFile($_FILES['upload_file'], $config)) {
         //echo 'File was upload';
+    } else {
+        echo 'some error';
     }
-} else {
-    var_dump($errors);
 }
 
 
