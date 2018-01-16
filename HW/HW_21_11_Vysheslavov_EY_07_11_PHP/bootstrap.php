@@ -3,11 +3,6 @@
 * PATH: /HW/HW_21_11_Vysheslavov_EY_07_11_PHP/
 */
 
-// TODO del this
-//require_once('./conf.php');
-//require_once('./data/menu.php');
-
-
 function bootstrap (array $projectFolders) {
     // require project data 
     /*

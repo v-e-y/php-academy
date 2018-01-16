@@ -55,8 +55,8 @@ print_r($fileList); */
         <h1 class="h3 font-weight-light">Завантаження та відображення файлів</h1>
     </header>
     <aside class="card mb-4 mt-4">
-        <div class="card-body">
-            <form action="/index.php" method="post" role="form" enctype="multipart/form-data" class="form-inline">
+        <div class="card-body" role="form">
+            <form action="/index.php" method="post" enctype="multipart/form-data" class="form-inline">
                 <div class="form-group mr-2">
                     <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
                     <input type="file" name="upload_file" id="upload_file"  accept=".png, .jpg, .jpeg, .csv, .pdf"  class="form-control">
