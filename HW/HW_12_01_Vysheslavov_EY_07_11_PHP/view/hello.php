@@ -26,5 +26,8 @@
     </div>
 </div>
 <?php else: ?>
-    <script>window.location.replace("/");</script>
+    <?php 
+        header("Location: http://{$_SERVER['HTTP_HOST']}/");
+        exit;
+    ?>
 <?php endif; ?>

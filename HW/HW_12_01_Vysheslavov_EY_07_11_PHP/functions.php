@@ -17,7 +17,7 @@
  */
 function checkFieldValue(string $fieldValue, array $appConf):bool {
     // var_dump($fieldValue, $appConf.minLength);
-    if (is_string($fieldValue) && strlen($fieldValue) > $appConf['minLength']) {
+    if (strlen($fieldValue) > $appConf['minLength']) {
         return true;
     }
     return false;

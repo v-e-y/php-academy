@@ -9,6 +9,7 @@
 */
 
 return [
+    // TODO rename this
     'minLength' => 3,
     'env' => 'dev',
     'routs' => [
